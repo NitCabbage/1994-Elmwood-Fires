@@ -1,65 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>About Me</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            line-height: 1.6;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        .main-info {
-            background: #333;
-            color: #fff;
-            padding: 20px;
-        }
-        .main-info h1 {
-            margin: 0;
-        }
-        .hobbies, .lewis, .course, .job, .fun-fact {
-            background: #e7e7e7;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Maker</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header class="main-info">
-            <h1>Connor Nitkiewicz</h1>
-            <h1>Preferred Name: Connor</h1>
-        </header>
-
-        <section class="lewis">
-			<h2>Year at Lewis: Sophomore </h2>
-			<h2>Lewis major/minor/concentrations: Majoring in Paralegal Studies and planning in minoring in something with computers</h2>
-			<h2>Reasons for pursuing this degree: I like learning about laws it is very interesting and I also like computers so I want to minor with it</h2>
-        </section>
-
-		<section class="course">
-            <h2>Reasons for Taking This Course</h2>
-            <p>I plan on minoring in something with computers so I am taking this class to test the waters and see if I enjoy it</p>
-        </section>
-
-		<section class="job">
-            <p>Current/Recent Job</p>
-			<p>Current Job is a bus aid for children with special needs so I load and unload them onto school buses and ensure they will be transported safely and my most recent job was an Infantryman in the Army</p>
-        </section>		
-
-        <section class="hobbies">
-            <h2>Hobbies and Special Interests</h2>
-            <p>My hobbies are I like watching random documentaries, star wars, watching the Packers, and exploring new places</p>
-        </section>
-
-        <section class="fun-fact">
-            <h2>Fun Fact</h2>
-            <p>A fun fact about myself is that I have 18 goats and I get married in less than two weeks</p>
-        </section>
-    </div>
+    <div class="header-box">Match Maker</div>
 </body>
 </html>
+/* Set the background image for the entire page */
+body {
+    background-image: url('https://www.pixelstalk.net/wp-content/uploads/images6/Hearts-Background-HD.jpg');
+    background-size: cover; /* This makes sure the image covers the entire background */
+    background-repeat: no-repeat; /* This prevents the image from repeating */
+    background-position: center; /* This centers the image on the page */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* This makes sure the body takes the full height of the viewport */
+}
+/* Create a text box in the upper middle of the page */
+.header-box {
+    position: absolute;
+    top: 20%; /* Adjust this value to move the box up or down */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 36px; /* Adjust the font size as needed */
+    border-radius: 10px; /* Optional: rounded corners for the box */
+}

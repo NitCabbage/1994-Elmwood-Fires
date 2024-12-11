@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,28 +6,63 @@
     <style>
         body {
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWI_kUJA3H8EZMrV9DJ3wCFEqahmlI7FAPig&s');
-            color: white; 
+            color: red; 
             font-family: Arial, sans-serif; 
         }
         h1 {
             font-size: 100px;
             color: lightseagreen;
-            text-align: center; 
+            text-align: center;
         }
         p {
-            color: tomato;
-            margin: 20px; 
-            font-size: 18px; 
+            color: red; 
+            margin: 20px;
+            font-size: 18px;
         }
         #newParagraph {
             display: none;
         }
-        #dropdownMenu {
+        #dropdownMenu, #newDropdownMenu {
             display: none;
             margin: 20px;
         }
         .hidden {
             display: none;
+        }
+        .game-over {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .win {
+            color: rgb(255, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .dead-end {
+            color: orange;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            padding: 10px;
+            background-color: lightgray;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: gray;
+        }
+        select {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            padding: 10px;
+            background-color: lightgray;
+            color: black;
+            border: none;
         }
     </style>
     <script>
@@ -37,18 +72,77 @@
         }
 
         function displayParagraph() {
-            // Hide all the paragraphs first
             var paragraphs = document.querySelectorAll('.investigation-paragraph');
             paragraphs.forEach(function(paragraph) {
                 paragraph.classList.add('hidden');
             });
-
-            // Show the selected paragraph
             var selectedValue = document.getElementById('options').value;
             var selectedParagraph = document.getElementById(selectedValue);
             if (selectedParagraph) {
                 selectedParagraph.classList.remove('hidden');
             }
+        }
+
+        function checkCellarPuzzle(answer) {
+            if (answer.toLowerCase() === "4893") {
+                document.getElementById('win').style.display = 'block';
+                document.getElementById('newDropdownMenu').style.display = 'block';  
+            } else {
+                document.getElementById('gameOver').style.display = 'block';
+                openGameOverWindow();
+            }
+        }
+
+        function openGameOverWindow() {
+            window.open("https://pbs.twimg.com/profile_images/1290966147060207617/BpoI94lm_400x400.jpg", "_blank", "width=400,height=400");
+        }
+
+        function displayNextStep() {
+            var paragraphs = document.querySelectorAll('.next-step-paragraph');
+            paragraphs.forEach(function(paragraph) {
+                paragraph.classList.add('hidden');
+            });
+            var selectedValue = document.getElementById('nextOptions').value;
+            var selectedParagraph = document.getElementById(selectedValue);
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('hidden');
+            }
+        }
+
+        function handleGrabChoice(choice) {
+            if (choice === "flashlight") {
+                document.getElementById('flashlightWin').style.display = 'block';
+                document.getElementById('flashlightPuzzle').style.display = 'block';  
+            } else {
+                document.getElementById('gameOver').style.display = 'block';
+                openGameOverWindow();
+            }
+        }
+
+        function checkPuzzleAnswer(answer) {
+            if (answer.toLowerCase() === "poppy") {
+                document.getElementById('puzzleWin').style.display = 'block';
+                document.getElementById('finalOutcome').style.display = 'block';  
+                document.getElementById('goUpstairsButton').style.display = 'block';  
+            } else {
+                document.getElementById('gameOver').style.display = 'block';
+                openGameOverWindow();
+            }
+        }
+
+        function goUpstairs() {
+            document.getElementById('upstairsParagraph').style.display = 'block';  
+            document.getElementById('turnAroundButton').style.display = 'block';  
+        }
+
+        function turnAround() {
+            document.getElementById('turnAroundParagraph').style.display = 'block';  
+            document.getElementById('thanksButton').style.display = 'block'; 
+        }
+
+        function showThanks() {
+            window.open("https://cdn.openart.ai/stable_diffusion/d6e4659aa276f5cad914039d6b08e5143c8abe2f_2000x2000.webp", "_blank", "width=800,height=800");
+            document.getElementById('thanksMessage').style.display = 'block';
         }
     </script>
 </head>
@@ -71,26 +165,93 @@
             <option value="">Select an option</option>
             <option value="option1">Go through the front door</option>
             <option value="option2">Talk to the neighbors</option>
-            <option value="option3">investigate the back yard</option>
+            <option value="option3">Investigate the backyard</option>
         </select>
     </div>
 
     <div id="option1" class="investigation-paragraph hidden">
-        <p>
-            The front door is locked and is being blocked by debris. Try another option.
+        <p>The front door is locked and is being blocked by debris. Try another option.</p>
     </div>
 
     <div id="option2" class="investigation-paragraph hidden">
-        <p>
-            The neighbors seem wary of talking about the fire, but after some convincing, one of them tells you that they saw a shadowy figure leaving the house that night. However, the person couldn’t identify who it was due to the darkness. Another neighbor mentions that they hear voices coming from the cellar entrence located in the back yard, and that it is the only way into the house.
-        </p>
+        <p>The neighbors seem wary of talking about the fire, but after some convincing, one of them tells you that they saw a shadowy figure leaving the house that night. However, the person couldn’t identify who it was due to the darkness. Another neighbor mentions that they hear voices coming from the cellar entrance located in the backyard, and that it is the only way into the house. Another one mentions that the family moved in on April 8th 1993 and that it was a VERY important date for the family and that they celebrated that date on the one year anniversary.</p>
     </div>
 
     <div id="option3" class="investigation-paragraph hidden">
-        <p>
-            While searching the backyard, you stumble across a half-burned notebook that you believe is the young daughter Poppy's diary. Only one page is legible and it contains a drawing of the family with a showdowy figure in the background. Above the figure the words "GET OUT" are scribbled mulitple times. You put the notebook in your backpack and head to the cellars entrence. 
-        </p>
+        <p>While searching the backyard, you stumble across a half-burned notebook that you believe is the young daughter Poppy's diary. Only one page is legible and it contains a drawing of the family with a shadowy figure in the background. Above the figure, the words "GET OUT" are scribbled multiple times. You put the notebook in your backpack and head to the cellar's entrance. The door is locked, but there is a keypad.</p>
+        <p>The keypad asks you for a code. What will you do?</p>
+        <input type="text" id="cellarCode" placeholder="Enter 4-digit code">
+        <button onclick="checkCellarPuzzle(document.getElementById('cellarCode').value)">Submit</button>
+    </div>
+
+    <div id="gameOver" class="game-over hidden">
+        <p>Incorrect code! The door doesn't open. You feel a strange feeling and as you turn around you see a shadowy figure rushing towards you. Game over!</p>
+        <button onclick="window.location.reload()">Try Again</button>
+    </div>
+
+    <div id="win" class="win hidden">
+        <p>Correct code! The door opens, and you step into the dark cellar. You notice a writing on the wall that looks like it was written by a child. It reads "It doesn't like the sun but I do" You take a picture and continue to search around the cellar. You stumble upon a workbench with a pitchfork, a flashlight, and a baseball bat resting on top of it.</p>
+        <p>What will you do next?</p>
+        <div id="newDropdownMenu" style="display:none;">
+            <label for="grabOptions">Choose what to grab:</label>
+            <select id="grabOptions" onchange="handleGrabChoice(this.value)">
+                <option value="">Select an option</option>
+                <option value="pitchfork">Grab Pitchfork</option>
+                <option value="flashlight">Grab Flashlight</option>
+                <option value="baseballbat">Grab Baseball Bat</option>
+            </select>
+        </div>
+        
+        <div id="flashlightWin" class="next-step-paragraph hidden">
+            <p>Great choice! You grabbed the flashlight. You make the connection from the writing on the wall that must mean whatever is in this house does not like bright lights.</p>
+        </div>
+
+        <div id="deadEndPitchfork" class="next-step-paragraph hidden">
+            <p>Bad choice! The pitchfork is no match for what lurks inside the house. Game over!</p>
+        </div>
+
+        <div id="deadEndBaseballBat" class="next-step-paragraph hidden">
+            <p>Bad choice! The baseball bat doesn’t help you in this situation. Game over!</p>
+        </div>
+
+        <div id="flashlightPuzzle" class="hidden">
+            <p>Now that you have the flashlight, you found the stairs that lead up to the main floor of the house. To move forward, you need to solve this puzzle:</p>
+            <p><strong>Who is the missing daughter of the Grover family that wrote in the journal?</strong></p>
+            <input type="text" id="puzzleAnswer" placeholder="Enter your answer">
+            <button onclick="checkPuzzleAnswer(document.getElementById('puzzleAnswer').value)">Submit Answer</button>
+        </div>
+
+        <div id="puzzleWin" class="win hidden">
+            <p>Correct! You continue your investigation.</p>
+        </div>
+
+        <div id="finalOutcome" class="next-step-paragraph hidden">
+            <p>You notice at the base of the stairs there are ten empty gasoline cans, could this be how the fire started? You decide to head upstairs.</p>
+        </div>
+
+        <div id="goUpstairsButton" class="hidden">
+            <button onclick="goUpstairs()">Go Upstairs</button>
+        </div>
+
+        <div id="upstairsParagraph" class="next-step-paragraph hidden">
+            <p>You head upstairs and you notice the walls are full of writings. It looks like the whole family went mad and began to scribble words on the walls. One of the words gets your attention and it shakes you to the core. It reads "It doesn't like the light, it doesn't like the light, so we turn this place into an inferno and send it back to hell. Can you think of anything brighter?" You think to yourself that it is starting to make sense; the family burned their house down to drive out whatever it was here. Just when you took out your camera, you hear something behind you...</p>
+        </div>
+
+        <div id="turnAroundButton" class="hidden">
+            <button onclick="turnAround()">Turn Around</button>
+        </div>
+
+        <div id="turnAroundParagraph" class="next-step-paragraph hidden">
+            <p>When you turn around, you are greeted by the shadowy figure. You start to snap pictures with your flash on to stun the figure... but it only made it bigger and stronger. Weeks pass and no one has heard from you. The investigation team enters the property and finds your clothes and camera sitting on the floor. They pick up the camera and remove the photograph that was being dispensed from the camera.</p>
+        </div>
+
+        <div id="thanksButton" class="hidden">
+            <button onclick="showThanks()">See Photo</button>
+        </div>
+
+        <div id="thanksMessage" class="hidden">
+            <p>This photograph sent shivers down the team's spine as they see the last thing you ever saw. They then hear a noise and point all their flashlights towards it, not knowing that is exactly what it wants to grow stronger... Thanks for Playing!</p>
+        </div>
     </div>
 </body>
 </html>
-
